@@ -23,3 +23,16 @@ double CalculateSalary(double baseSalary, double& tax, double& pensionFund, doub
     double totalDeductions = tax + pensionFund + unemploymentFund + reserveFund + militaryTax;
     return baseSalary - totalDeductions;
 }
+void CalculateApartmentCost(double area, double& costUSA, double& costEU) {
+    if (area <= 37) costUSA = 3788;
+    else if (area <= 39) costUSA = 3940;
+    else if (area <= 41) costUSA = 4142;
+    else if (area <= 43) costUSA = 4344;
+    else costUSA = 4546;
+
+    if (area <= 37) costEU = 8;
+    else if (area <= 39) costEU = 9;
+    else if (area <= 41) costEU = 10;
+    else if (area <= 43) costEU = 11;
+    else costEU = 12;
+}
