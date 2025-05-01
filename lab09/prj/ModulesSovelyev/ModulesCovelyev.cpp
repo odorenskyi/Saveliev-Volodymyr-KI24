@@ -36,3 +36,24 @@ void CalculateApartmentCost(double area, double& costUSA, double& costEU) {
     else if (area <= 43) costEU = 11;
     else costEU = 12;
 }
+int CalculateBinaryCount(int N) {
+    if (N < 0 || N > 7483650) {
+        return -1;
+    }
+
+    int zeros = 0;
+    int ones = 0;
+    int temp = N;
+
+    while (temp > 0) {
+        (temp & 1) ? ones++ : zeros++;
+        temp >>= 1;
+    }
+
+    if (N == 0) {
+        zeros = 1;
+        ones = 0;
+    }
+
+    return (N & 1) ? ones : zeros;
+}
