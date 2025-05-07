@@ -163,3 +163,23 @@ void append_punctuation_count(const string& input_filename, const string& output
     out_file << "Дата та час запису: " << put_time(&local_time, "%Y-%m-%d %H:%M:%S") << "\n";
     out_file.close();
 }
+void append_calculation_results(const string& output_filename, double x, double y, double a, unsigned int b) {
+    ofstream out_file(output_filename, ios::app);
+    if (!out_file.is_open()) {
+        cerr << "Помилка: неможливо відкрити файл!\n";
+        return;
+    }
+
+    double result = s_calculation(x, y, a);
+    out_file << fixed << setprecision(6);
+    out_file << "\nРезультат s_calculation(" << x << ", " << y << ", " << a << "): " << result << "\n";
+
+    string binary = b == 0 ? "0" : "";
+    unsigned int temp = b;
+    while (temp > 0) {
+        binary = (temp % 2 == 0 ? "0" : "1") + binary;
+        temp /= 2;
+    }
+
+    out_file << "Число " << b << " у двійковому коді: " << binary << "\n";
+}

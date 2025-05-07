@@ -10,3 +10,4 @@ void process_text_file(const string& input_filename, const string& output_filena
     const string& author_name, const string& institution,
     const string& city, const string& country, int year); 
 void append_punctuation_count(const string&, const string&);
+void append_calculation_results(const string& output_filename, double x, double y, double a, unsigned int b);
