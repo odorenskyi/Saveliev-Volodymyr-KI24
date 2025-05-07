@@ -9,3 +9,4 @@ int CalculateBinaryCount(int N);
 void process_text_file(const string& input_filename, const string& output_filename,
     const string& author_name, const string& institution,
     const string& city, const string& country, int year); 
+void append_punctuation_count(const string&, const string&);

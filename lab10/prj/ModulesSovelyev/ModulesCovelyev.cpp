@@ -130,3 +130,36 @@ void process_text_file(const string& input_filename, const string& output_filena
     out_file << "Університет: " << (has_university ? "так" : "ні") << "\n";
     out_file << "Блокнот: " << (has_notebook ? "так" : "ні") << "\n";
 }
+void append_punctuation_count(const string& input_filename, const string& output_filename) {
+    ifstream in_file(input_filename);
+    if (!in_file.is_open()) {
+        ofstream error_file(output_filename);
+        error_file << "Помилка: неможливо відкрити файл!\n";
+        error_file.close();
+        return;
+    }
+
+    stringstream buffer;
+    buffer << in_file.rdbuf();
+    string content = buffer.str();
+    in_file.close();
+
+    // Видаляємо \r для коректної роботи на Windows
+    content.erase(remove(content.begin(), content.end(), '\r'), content.end());
+
+    int punctuation_count = count_if(content.begin(), content.end(), [](char c) {
+        return c == '.' || c == ',' || c == '!' || c == '?' || c == ';' || c == ':';
+        });
+
+    ofstream out_file(output_filename);
+    out_file << "Кількість знаків пунктуації: " << punctuation_count << "\n";
+    time_t now = time(nullptr);
+    tm local_time{};
+#ifdef _WIN32
+    localtime_s(&local_time, &now);
+#else
+    local_time = *localtime(&now);
+#endif
+    out_file << "Дата та час запису: " << put_time(&local_time, "%Y-%m-%d %H:%M:%S") << "\n";
+    out_file.close();
+}
